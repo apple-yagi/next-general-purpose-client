@@ -1,10 +1,12 @@
 import {
-  Drawer, IconButton, List, ListItem, ListItemIcon
+  Drawer, IconButton, List
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle, HomeOutlined, ListOutlined } from "@material-ui/icons";
-import { FC, useState } from "react";
+import { createRef, FC, useState } from "react";
 import NextLink from 'next/link'
+import { PageItem } from "../../types/list-link-item";
+import CustomItemLink from "./CustomItemLink";
 
 const useStyles = makeStyles({
   header: {
@@ -20,31 +22,21 @@ const useStyles = makeStyles({
 const Header: FC = () => {
   const classes = useStyles()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const ref = createRef()
 
-  const pages = [{ name: 'Home', link: '/', icon: <HomeOutlined /> }, { name: 'Users', link: '/users', icon: <AccountCircle /> }]
-  const ListItemLink = (props) => {
-    return <ListItem button component="a" {...props} />
-  }
-
-  const list = () =>
-    (
-      <div className="w-40 md:w-48" role="presentation" onClick={(e) => setIsOpen(false)}
-        onKeyDown={e => setIsOpen(false)} >
-        <List>
-          {pages.map(page => (
-            <ListItemLink key={page.name} href={page.link}>
-              <ListItemIcon>{page.icon}</ListItemIcon>
-              <ListItemIcon>{page.name}</ListItemIcon>
-            </ListItemLink>
-          ))}
-        </List>
-      </div>
-    )
+  const pages: PageItem[] = [{ name: 'Home', link: '/', icon: <HomeOutlined /> }, { name: 'Users', link: '/users', icon: <AccountCircle /> }]
 
   return (
     <div>
       <Drawer anchor="left" className="md:w-20" open={isOpen} onClose={(e) => setIsOpen(false)} >
-        {list()}
+        <div className="w-40 md:w-48" role="presentation" onClick={(e) => setIsOpen(false)}
+          onKeyDown={e => setIsOpen(false)} >
+          <List>
+            {pages.map(page => (
+              <CustomItemLink key={page.name} page={page} />
+            ))}
+          </List>
+        </div>
       </Drawer>
       <header className={`shadow flex justify-between ${classes.header}`}>
         <NextLink href="/"><a className="flex items-center"><img className="h-6 w-6 md:h-8 md:w-8" src="purpose.png" alt="purpose icon" />
