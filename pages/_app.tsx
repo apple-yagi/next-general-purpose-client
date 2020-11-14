@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/globals.css'
 import '../styles/tailwind.css'
 import Header from '../components/navigators/Header';
+import AuthProvider from '../src/auth/AuthProvider';
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
@@ -17,12 +18,12 @@ const App = (props: AppProps) => {
   }, []);
 
   return (
-    <Fragment>
+    <AuthProvider>
       <Header />
       <main>
         <Component {...pageProps} />
       </main>
-    </Fragment>
+    </AuthProvider>
   )
 }
 
