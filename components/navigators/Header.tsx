@@ -2,7 +2,7 @@ import {
   Drawer, IconButton, List
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { AccountCircle, HomeOutlined, ListOutlined } from "@material-ui/icons";
+import { AccountCircle, HomeOutlined, ListOutlined, ListAlt } from "@material-ui/icons";
 import { FC, useState } from "react";
 import NextLink from 'next/link'
 import { PageItem } from "../../types/list-link-item";
@@ -23,7 +23,11 @@ const Header: FC = () => {
   const classes = useStyles()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const pages: PageItem[] = [{ name: 'Home', link: '/', icon: <HomeOutlined /> }, { name: 'Users', link: '/users', icon: <AccountCircle /> }]
+  const pages: PageItem[] = [
+    { name: 'Home', link: '/', icon: <HomeOutlined /> },
+    { name: 'Users', link: '/users', icon: <AccountCircle /> },
+    { name: 'Tasks', link: '/tasks', icon: <ListAlt /> }
+  ]
 
   return (
     <div>
@@ -44,8 +48,9 @@ const Header: FC = () => {
           <IconButton onClick={(e) => (setIsOpen(true))}><ListOutlined /></IconButton>
         </div>
         <ul className="hidden pt-3 md:block">
-          <li className={classes.li}><NextLink href="/"><a>ホーム</a></NextLink></li>
-          <li className={classes.li}><NextLink href="/users" ><a>ユーザ</a></NextLink></li>
+          {pages.map(page => (
+            <li key={page.name} className={classes.li}><NextLink href={page.link}><a>{page.name}</a></NextLink></li>
+          ))}
         </ul>
       </header>
     </div>

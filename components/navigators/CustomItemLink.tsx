@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, RefObject, useRef } from "react";
+import React, { FC, forwardRef } from "react";
 import { PageItem } from "../../types/list-link-item";
 import NextLink from 'next/link'
 import { ListItem, ListItemIcon, ListItemProps } from "@material-ui/core";

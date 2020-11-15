@@ -1,22 +1,15 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext } from "react";
 import AuthContext from "../../src/auth/AuthContext"
-import { useRouter } from 'next/router'
+import PrivateRoute from "../../src/guards/PrivateRoute";
 
 const Users: FC = () => {
   const { info } = useContext(AuthContext);
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!info.token) {
-      router.push('/users/login')
-    }
-  }, [info])
 
   return (
-    <div>
+    <PrivateRoute>
       <h1>User Page</h1>
       { info.token && <h2>{info.token}</h2>}
-    </div>
+    </PrivateRoute>
   )
 }
 
