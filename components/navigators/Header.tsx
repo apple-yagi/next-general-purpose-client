@@ -3,7 +3,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle, HomeOutlined, ListOutlined } from "@material-ui/icons";
-import { createRef, FC, useState } from "react";
+import { FC, useState } from "react";
 import NextLink from 'next/link'
 import { PageItem } from "../../types/list-link-item";
 import CustomItemLink from "./CustomItemLink";
@@ -22,7 +22,6 @@ const useStyles = makeStyles({
 const Header: FC = () => {
   const classes = useStyles()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const ref = createRef()
 
   const pages: PageItem[] = [{ name: 'Home', link: '/', icon: <HomeOutlined /> }, { name: 'Users', link: '/users', icon: <AccountCircle /> }]
 
@@ -39,7 +38,7 @@ const Header: FC = () => {
         </div>
       </Drawer>
       <header className={`shadow flex justify-between ${classes.header}`}>
-        <NextLink href="/"><a className="flex items-center"><img className="h-6 w-6 md:h-8 md:w-8" src="purpose.png" alt="purpose icon" />
+        <NextLink href="/"><a className="flex items-center"><img className="h-6 w-6 md:h-8 md:w-8" src="/purpose.png" alt="purpose icon" />
           <span className="text-lg md:text-2xl">Purpose Client</span></a></NextLink>
         <div className="md:hidden mr-5">
           <IconButton onClick={(e) => (setIsOpen(true))}><ListOutlined /></IconButton>

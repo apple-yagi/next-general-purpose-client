@@ -2,6 +2,8 @@ import React from 'react'
 
 interface AuthProps {
   token: string;
+  isLoading: boolean;
+  error: string;
 }
 
 interface AuthMethods {
@@ -12,7 +14,7 @@ interface AuthMethods {
 type AuthContext = { info: AuthProps | null } & AuthMethods;
 
 const context = React.createContext<AuthContext>({
-  info: null,
+  info: { token: '', isLoading: false, error: '' },
   login(): void {
     throw Error("Not Implemented")
   },
